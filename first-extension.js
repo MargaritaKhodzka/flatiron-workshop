@@ -1,7 +1,13 @@
-const interval = 1000 * 10 * 60 ; //10 minutes
+function imageSubstituter() {
+  let images = document.querySelectorAll('img[class*="EntityPhoto"]');
 
-const reminder = () => {
-  alert('Get off twitter!!!');
-};
+  for (let i = 0; i < images.length; i++) {
+    images[i].src = browser.runtime.getURL('images/kitten.jpg');
+  }
+}
 
-setInterval(reminder, interval);
+const observer = new MutationObserver(imageSubstituter);
+
+const config = { childList: true, subtree: true };
+
+observer.observe(document.body, config);
